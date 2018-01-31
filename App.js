@@ -14,9 +14,9 @@ export default class App extends React.Component {
     Alert.alert("plup !");
   }
   componentDidMount() {
-    fetch("http://3f78c221.ngrok.io/sow7/web/app_dev.php/user")
+    fetch("http://cdbf16f9.ngrok.io/sow7/web/app_dev.php/api/users")
       .then(result => {
-        console.log('second', (result._bodyText));
+        console.log("second", result._bodyText);
         this.setState({
           isLoaded: true,
           items: JSON.parse(result._bodyText)
@@ -30,18 +30,18 @@ export default class App extends React.Component {
       });
   }
   render() {
-    console.log('third',this.state.items);
+    console.log("third", this.state.items);
     if (this.state.isLoaded) {
       return (
         <View style={styles.container}>
           <Text> Click on the plop : </Text>
           <Button onPress={this.handleClick.bind(this)} title="Go" />
-          {this.state.items.map((item, index) =>
+          {this.state.items.map((item, index) => (
             <View key={index}>
               <Text>{item.name}</Text>
               <Text>{item.email}</Text>
             </View>
-          )}
+          ))}
         </View>
       );
     } else {

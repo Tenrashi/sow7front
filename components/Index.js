@@ -2,45 +2,55 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Alert, Button } from "react-native";
 
 export default class App extends React.Component {
-    
-    constructor(){
-       super();
-        this.state={
-            chaussette:[],
-        };
-    }
-  
-    handleClick() {
-    Alert.alert("Hello !");
+  constructor() {
+    super();
+    this.state = {
+      items: [],
+      isLoaded: false
+    };
   }
-  componentDidMount(){
-    fetch('http://3f78c221.ngrok.io/sow7/web/app_dev.php/user')
-    .then(results =>{
-        return results.json();
-    }).then(data =>{
-    let chaussette = data.results.map((pic) => {
-        return(
-            <div key={pic.picture}>
-                <img src={pic.picture} />
-            </div>
-        )
-    })
-    this.setState({chaussette: picture})
-})
-}
-  render() {
 
-    return (
-      <View style={styles.container}>
-        <div>
-            <div>
-                {this.state.chaussette}
-            </div>
-        </div>
-        <Text> Click on the button : </Text>
-        <Button onPress={this.handleClick.bind(this)} title="Go" />
-      </View>
-    );
+  handleClick() {
+    Alert.alert("plup !");
+  }
+  componentDidMount() {
+    fetch("http://cdbf16f9.ngrok.io/sow7/web/app_dev.php/api/users")
+      .then(result => {
+        console.log("second", result._bodyText);
+        this.setState({
+          isLoaded: true,
+          items: JSON.parse(result._bodyText)
+        });
+      })
+      .catch(error => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      });
+  }
+  render() {
+    console.log("third", this.state.items);
+    if (this.state.isLoaded) {
+      return (
+        <View style={styles.container}>
+          <Text> Click on the plop : </Text>
+          <Button onPress={this.handleClick.bind(this)} title="Go" />
+          {this.state.items.map((item, index) => (
+            <View key={index}>
+              <Text>{item.name}</Text>
+              <Text>{item.email}</Text>
+            </View>
+          ))}
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
+    }
   }
 }
 const styles = StyleSheet.create({
