@@ -17,7 +17,7 @@ export default class index extends React.Component {
     Alert.alert("plup !");
   }
   componentDidMount() {
-    fetch("http://cdbf16f9.ngrok.io/sow7/web/app_dev.php/api/users")
+    fetch("http://2ae00157.ngrok.io/api/users")
       .then(result => {
         console.log("second", result._bodyText);
         this.setState({

@@ -7,6 +7,6 @@ import camera from "./components/Camera";
 
 export default TabNavigator({
   TabOne: { screen: TabOne },
-  index: { screen: index },
   camera: { screen: camera },
+  index: { screen: index },
 });

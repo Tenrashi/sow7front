@@ -37,7 +37,7 @@ export default class App extends React.Component {
         formData.append('picture', { uri: data.uri, name: 'photo.jpg', type: 'image/jpg' });
 
         axios
-          .post('Votre URL', formData)
+          .post('http://2ae00157.ngrok.io/api/users', formData)
           .then(res => {
             Vibration.vibrate();
             this.setState(prevState => {
