@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Alert, Button } from "react-native";
 
-export default class App extends React.Component {
+export default class index extends React.Component {
+  static navigationOptions = {
+    tabBarLabel: "Choose your socks",
+  };
   constructor() {
     super();
     this.state = {
